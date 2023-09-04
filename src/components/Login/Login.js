@@ -18,6 +18,7 @@ const passwordReducer = (state, action) => {
 const usernames = ["sohrab", "rahim"];
 
 const Login = () => {
+	const cfx = useContext(AuthContext);
 	const [formValidation, setFormValidation] = useState(false);
 	const [usernameAvail, setUsernameAvail] = useState(true);
 	const [emailValid, dispatchEmail] = useReducer(emailReducer, {
@@ -55,7 +56,6 @@ const Login = () => {
 		}
 	};
 
-	const cfx = useContext(AuthContext);
 	return (
 		<div className="flex justify-center items-center mt-5">
 			<div className="shadow-md bg-slate-300 p-6 rounded-lg sm:w-11/12 md:w-11/12 lg:w-1/2">
