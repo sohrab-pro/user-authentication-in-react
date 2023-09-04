@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import AuthContext from "../../store/auth-context";
+import Input from "./Input";
 
 const emailReducer = (state, action) => {
 	if (action.type === "CHANGE") {
@@ -60,30 +61,26 @@ const Login = () => {
 		<div className="flex justify-center items-center mt-5">
 			<div className="shadow-md bg-slate-300 p-6 rounded-lg sm:w-11/12 md:w-11/12 lg:w-1/2">
 				<form onSubmit={handleLogin}>
-					<label htmlFor="username" className="block mb-2">
-						Username:
-					</label>
-					<input
+					<Input
+						label="Username"
 						type="text"
 						onChange={usernameHandler}
 						value={emailValid.value}
 						id="username"
 						className="p-2 w-full mb-3"
-						required
+						required={true}
 					/>
 					<p className="text-red-600">
 						{usernameAvail ? "" : "Username not available"}
 					</p>
-					<label htmlFor="password" className="block mb-2">
-						Password:
-					</label>
-					<input
+					<Input
+						label="Password"
+						type="password"
 						onChange={passwordHandler}
 						value={passwordValid.value}
-						type="password"
 						id="password"
 						className="p-2 w-full mb-3"
-						required
+						required={true}
 					/>
 					<div className="flex justify-center">
 						<button
