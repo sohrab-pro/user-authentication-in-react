@@ -1,4 +1,5 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
+import AuthContext from "../../store/auth-context";
 
 const emailReducer = (state, action) => {
 	if (action.type === "CHANGE") {
@@ -16,7 +17,7 @@ const passwordReducer = (state, action) => {
 
 const usernames = ["sohrab", "rahim"];
 
-const Login = (props) => {
+const Login = () => {
 	const [formValidation, setFormValidation] = useState(false);
 	const [usernameAvail, setUsernameAvail] = useState(true);
 	const [emailValid, dispatchEmail] = useReducer(emailReducer, {
@@ -45,15 +46,16 @@ const Login = (props) => {
 		setFormValidation(
 			emailValid.isValid && passwordValid.isValid && usernameAvail
 		);
-	}, [emailValid.value, passwordValid.value, usernameAvail]);
+	}, [emailValid, passwordValid, usernameAvail]);
 
 	const handleLogin = (e) => {
 		e.preventDefault();
 		if (formValidation) {
-			props.onLogin();
+			cfx.onLogin();
 		}
 	};
 
+	const cfx = useContext(AuthContext);
 	return (
 		<div className="flex justify-center items-center mt-5">
 			<div className="shadow-md bg-slate-300 p-6 rounded-lg sm:w-11/12 md:w-11/12 lg:w-1/2">

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login.js";
-import Navbar from "./components/Navbar/Navbar";
+import AuthContext from "./store/auth-context";
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,16 +22,15 @@ function App() {
 		localStorage.setItem("isLoggedIn", false);
 	};
 	return (
-		<div className="">
-			{isLoggedIn ? (
-				<>
-					<Navbar onLogout={logOutHandler} />
-					<Home />
-				</>
-			) : (
-				<Login onLogin={loginHandler} />
-			)}
-		</div>
+		<AuthContext.Provider
+			value={{
+				isLoggedIn: isLoggedIn,
+				onLogout: logOutHandler,
+				onLogin: loginHandler,
+			}}>
+			{!isLoggedIn && <Login />}
+			{isLoggedIn && <Home />}
+		</AuthContext.Provider>
 	);
 }
 
